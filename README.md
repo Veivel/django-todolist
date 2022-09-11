@@ -1,26 +1,62 @@
-# Tugas 2 PBP
-Nama: Givarrel Veivel Pattiwael <br>
-NPM: 2106640341 <br>
-Kelas: PBP D <br>
-[apaituplatform.herokuapp.com](http://apaituplatform.herokuapp.com/) -- 
-[halaman katalog](http://apaituplatform.herokuapp.com/katalog/)
+# Template Proyek Django PBP
 
----
+Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
 
-1. **Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html;**
+*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
 
-	![](gambar_bagan.png)
+## Pendahuluan
 
-	`views.py` adalah module yang mengendalikan isi konten yang dilihat pengguna website. Ia bertugas mengambil data (model dari `models.py`) dan mengembalikan template (file html) untuk ditampilkan.
-	
-	Namun, dalam sebuah website umumnya terdapat lebih dari satu halaman (dari sepemahaman saya, ada satu views untuk setiap halaman). Maka pemilihan module `views.py` mana yang akan digunakan bergantung pada `urls.py`. Django akan meng-iterate list urlpatterns dan mencari item pertama yang cocok, kemudian menggunakan `views.py` yang sesuai.
+Repositori ini merupakan sebuah template yang dirancang untuk membantu mahasiswa yang sedang mengambil mata kuliah Pemrograman Berbasis Platform (CSGE602022) mengetahui struktur sebuah proyek aplikasi Django serta file dan konfigurasi yang penting dalam berjalannya aplikasi. Kamu dapat dengan bebas menyalin isi dari repositori ini atau memanfaatkan repositori ini sebagai pembelajaran sekaligus awalan dalam membuat sebuah proyek Django.
 
-2. **Jelaskan kenapa menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?**
+## Cara Menggunakan
 
-	Bisa saja, asal Django dan dependecies terkait sudah terinstall di environment global (utama) Python yang digunakan. Namun kita tetap prefer menggunakan virtual environment agar ada pemisahan antara Python global beserta library-library yang digunakan untuk kepentingan lain, dengan Python virtual env beserta library yang versinya spesifik untuk tugas PBP ini. Jika tidak ada pemisahan tersebut maka sulit untuk mengatasi konflik versi yang bentrok.
+Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
 
-3. **Jelaskan bagaimana cara kamu mengimplementasikan poin 1 sampai dengan 4 di atas.**
+1. Buka laman GitHub repositori templat kode, lalu klik tombol "**Use this template**"
+   untuk membuat salinan repositori ke dalam akun GitHub milikmu.
+2. Buka laman GitHub repositori yang dibuat dari templat, lalu gunakan perintah
+   `git clone` untuk menyalin repositorinya ke suatu lokasi di dalam sistem
+   berkas (_filesystem_) komputermu:
 
-	Saya pertama meng-clone repository saya dan mulai melihat-lihat objektif Tugas 2 dan file-file yang tersedia. Kemudian saya mulai mencoba-coba mengisi file seperti urls.py dan settings.py di project_django dan membuat virtual environment. Setiap kali ada progress, saya mencoba `python manage.py runserver` untuk melihat apa yang masih kurang. 
-	
-	Ketika stuck, saya merujuk ke Tutorial Lab 1 untuk mengingat kembali tahapan-tahapan pengerjaan yang saya lakukan. Setelah mengedit *katalog.html, urls.py, views.py* dan *models.py* dalam folder katalog, saya coba melakukan migration. Saya kombinasikan seluruh step 1-4 dengan trial-and-error, sampai berhasil jalan di `localhost:8000`. Setelah itu saya deploy di Heroku dengan cara yang sama dengan Tutorial Lab 0.
+   ```shell
+   git clone <URL ke repositori di GitHub> <path ke suatu lokasi di filesystem>
+   ```
+3. Masuk ke dalam repositori yang sudah di-_clone_ dan jalankan perintah berikut
+   untuk menyalakan _virtual environment_:
+
+   ```shell
+   python -m venv env
+   ```
+4. Nyalakan environment dengan perintah berikut:
+
+   ```shell
+   # Windows
+   .\env\Scripts\activate
+   # Linux/Unix, e.g. Ubuntu, MacOS
+   source env/bin/activate
+   ```
+5. Install dependencies yang dibutuhkan untuk menjalankan aplikasi dengan perintah berikut:
+
+   ```shell
+   pip install -r requirements.txt
+   ```
+
+6. Jalankan aplikasi Django menggunakan server pengembangan yang berjalan secara
+   lokal:
+
+   ```shell
+   python manage.py runserver
+   ```
+7. Bukalah `http://localhost:8000` pada browser favoritmu untuk melihat apakah aplikasi sudah berjalan dengan benar.
+
+## Contoh Deployment 
+
+Pada template ini, deployment dilakukan dengan memanfaatkan GitHub Actions sebagai _runner_ dan Heroku sebagai platform Hosting aplikasi. 
+
+Untuk melakukan deployment, kamu dapat melihat instruksi yang ada pada [Tutorial 0](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-0).
+
+Untuk contoh aplikasi Django yang sudah di deploy, dapat kamu akses di [https://django-pbp-template.herokuapp.com/](https://django-pbp-template.herokuapp.com/)
+
+## Credits
+
+Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
