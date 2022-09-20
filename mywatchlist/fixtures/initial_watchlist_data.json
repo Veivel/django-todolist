@@ -14,11 +14,11 @@
         "model": "mywatchlist.MyWatchlist",
         "pk": 2,
         "fields": {
-            "watched": true,
+            "watched": false,
             "title": "Cats",
             "rating": 1,
             "release_date": "2021-05-13",
-            "review": "ew"
+            "review": "Film musical"
         }
     },
     {
@@ -29,7 +29,7 @@
             "title": "Hamilton",
             "rating": 5,
             "release_date": "2019-01-01",
-            "review": "review"
+            "review": "Lagu-lagunya asik"
         }
     },
     {
@@ -40,7 +40,7 @@
             "title": "Cars",
             "rating": 4,
             "release_date": "2003-01-01",
-            "review": "nostalgia banget"
+            "review": "Film nostalgia"
         }
     },
     {
@@ -51,7 +51,7 @@
             "title": "Cars 2",
             "rating": 5,
             "release_date": "2012-01-01",
-            "review": "keren"
+            "review": "cool!"
         }
     },
     {
@@ -60,9 +60,9 @@
         "fields": {
             "watched": true,
             "title": "Cars 3",
-            "rating": 2,
+            "rating": 1,
             "release_date": "2017-02-27",
-            "review": "jelek"
+            "review": "Sangat mengecewakan"
         }
     },
     {
@@ -84,14 +84,14 @@
             "title": "Spirited Away",
             "rating": 5,
             "release_date": "2001-12-13",
-            "review": "studio ghibli"
+            "review": "Film studio ghibli yang indah"
         }
     },
     {
         "model": "mywatchlist.MyWatchlist",
         "pk": 9,
         "fields": {
-            "watched": true,
+            "watched": false,
             "title": "fake movie",
             "rating": 1,
             "release_date": "2021-01-01",
@@ -106,7 +106,19 @@
             "title": "La La Land",
             "rating": 5,
             "release_date": "2017-01-01",
-            "review": ":D"
+            "review": "my favorite movie"
+        }
+    },
+
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 11,
+        "fields": {
+            "watched": false,
+            "title": "High School Musical",
+            "rating": 4,
+            "release_date": "2002-02-02",
+            "review": "classic movie"
         }
     }
 ]
