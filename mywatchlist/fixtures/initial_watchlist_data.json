@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "The Matrix",
+            "rating": 5,
+            "release_date": "1999-01-01",
+            "review": "wait this isn't linear algebra"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Cats",
+            "rating": 1,
+            "release_date": "2021-05-13",
+            "review": "ew"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Hamilton",
+            "rating": 5,
+            "release_date": "2019-01-01",
+            "review": "review"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Cars",
+            "rating": 4,
+            "release_date": "2003-01-01",
+            "review": "nostalgia banget"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Cars 2",
+            "rating": 5,
+            "release_date": "2012-01-01",
+            "review": "keren"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Cars 3",
+            "rating": 2,
+            "release_date": "2017-02-27",
+            "review": "jelek"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "Turning Red",
+            "rating": 4,
+            "release_date": "2020-01-01",
+            "review": "disney movie"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "Spirited Away",
+            "rating": 5,
+            "release_date": "2001-12-13",
+            "review": "studio ghibli"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "fake movie",
+            "rating": 1,
+            "release_date": "2021-01-01",
+            "review": "fake review"
+        }
+    },
+    {
+        "model": "mywatchlist.MyWatchlist",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "La La Land",
+            "rating": 5,
+            "release_date": "2017-01-01",
+            "review": ":D"
+        }
+    }
+]

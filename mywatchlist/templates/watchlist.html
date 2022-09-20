@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+{% if num_balance >= 0 %}
+  <h3>Selamat, kamu sudah banyak menonton!</h3>
+{% else %}
+  <h3>Wah, kamu masih sedikit menonton!</h3>
+{% endif %}
+
+<h1>{{title}}</h1>
+  <table>
+    <tr>
+      <th>Watched</th>
+      <th>Title</th>
+      <th>Rating</th>
+      <th>Release Date</th>
+      <th>Review</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for item in list_watchlist %}
+      <tr>
+          <th>{{item.watched}}</th>
+          <th>{{item.title}}</th>
+          <th>{{item.rating}}</th>
+          <th>{{item.release_date}}</th>
+          <th>{{item.review}}</th>
+      </tr>
+    {% endfor %}
+  </table>
+
+ {% endblock content %}
