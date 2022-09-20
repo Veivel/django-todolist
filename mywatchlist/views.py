@@ -4,7 +4,6 @@ from django.core import serializers
 from django.http import HttpResponse
 
 from mywatchlist.models import MyWatchlist
-import pandas as pd
 
 # Create your views here.
 # def CustomParser(data):
