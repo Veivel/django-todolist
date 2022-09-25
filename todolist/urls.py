@@ -8,5 +8,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login_user'),
     path('logout/', logout_user, name='logout_user'),
-    path('create-task/', add_task, name='add_task')
+    path('create-task/', add_task, name='add_task'),
+    path('finish-task/<int:id>', finish_task, name='finish_task'),
+    path('delete-task/<int:id>', delete_task, name='delete_task'),
+    path('delete-all', delete_all, name='delete_all')
 ]

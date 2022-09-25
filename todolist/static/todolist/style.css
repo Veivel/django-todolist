@@ -1,0 +1,35 @@
+/* Acknowledgements: https://stackoverflow.com/questions/70129007/django-static-css-is-not-loading-on-page*/
+
+body {
+    text-align: center;
+    }
+
+h1 {
+    margin:25px;
+    margin-left:0px;
+    margin-bottom: 2px;
+    font-family: Helvetica, sans-serif;
+    font-size: 40px;
+  }
+
+table {
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    border: 2px solid #000;
+    border-radius: 7px;
+}
+
+td {
+    border-style: none;
+    border-left: none 0px;
+    border-right: none 0px;
+    border-collapse: separate;
+}
+tr:hover {
+    background-color: rgb(238, 238, 238);
+    border-color: 1px solid white;
+}

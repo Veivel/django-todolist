@@ -1,4 +1,3 @@
-
 import datetime
 from django.shortcuts import render
 from todolist.models import Task
@@ -20,11 +19,13 @@ from django.urls import reverse
 @login_required(login_url='login/')
 def show_todolist(request):
     ''' A view displaying the user's todo list.'''
-    current_username = request.COOKIES['username']
+    
+    current_user = request.user
     context = {
-        'title':"Here is your todolist.",
-        'name': current_username,
-        'list_tasks': Task.objects.filter(user=current_username),
+        'title':"Welcome back,",
+        'subtitle':"Here is your todolist.",
+        'name': current_user,
+        'list_tasks': Task.objects.filter(user=current_user),
         'last_login': request.COOKIES['last_login']
     }
     return render(request, 'todolist.html', context)
@@ -32,26 +33,58 @@ def show_todolist(request):
 @login_required(login_url='login/')
 def add_task(request):
     ''' A view serving a form (to the user) to create a new todolist task. '''
+    
     if request.method == "POST":
         form = Form(request.POST)
         
         new_task = Task()
-        new_task.user = request.COOKIES['username']
+        new_task.user = request.user
         new_task.date = datetime.date.today()
         new_task.task_name = form.data['task_name']
         new_task.description = form.data['description']
         new_task.save()
         
         response = HttpResponseRedirect(reverse("todolist:show_todolist"))
-        messages.success(request, 'Task... saved?')
+        messages.success(request, 'Task saved.')
         return(response)
     else:
         context = {}
         return render(request, 'add_task.html', context)
+
+@login_required(login_url='login/')
+def finish_task(request, id):
+    ''' Change is_finished status (completion) of a task to True.'''
     
+    task = Task.objects.get(pk=id)
+    task.is_finished = True
+    task.save()
+    messages.success(request, "Task complete!")
+    
+    return redirect("todolist:show_todolist")
+
+@login_required(login_url='login/')
+def delete_task(request, id):
+    ''' Remove task from database completely.'''
+    
+    Task.objects.filter(pk=id).delete()
+    messages.success(request, "Task deleted.")
+    
+    return redirect("todolist:show_todolist")
+
+@login_required(login_url='login/')
+def delete_all(request):
+    ''' Delete (all of) one user's tasks.'''
+    
+    Task.objects.filter(user=request.user).delete()
+    messages.success(request, "Tasks deleted.")
+    
+    return redirect("todolist:show_todolist")
+
 def __flush_tasks():
     ''' In case I need to delete the entire tasks table. '''
+    
     Task.objects.all().delete()
+    print("\n\nFlush successful.\n\n")
 
 def register(request):
     form = forms.UserCreationForm()
@@ -62,9 +95,9 @@ def register(request):
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('todolist:login_user')
-    
-    context = {'form':form}
-    return render(request, 'register.html', context)
+    else:
+        context = {'form':form}
+        return render(request, 'register.html', context)
     
 def login_user(request):
     if request.method == 'POST':
@@ -75,12 +108,13 @@ def login_user(request):
             login(request, user) # melakukan login terlebih dahulu
             response = HttpResponseRedirect(reverse("todolist:show_todolist")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # menyimpan cookies ke response
-            response.set_cookie('username', user.get_username())
+            response.set_cookie('user', user)
             return response
         else:
             messages.info(request, 'Username atau Password salah!')
-    context = {}
-    return render(request, 'login.html', context)
+    else:
+        context = {}
+        return render(request, 'login.html', context)
     
 def logout_user(request):
     logout(request)

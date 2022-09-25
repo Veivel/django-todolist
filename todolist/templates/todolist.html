@@ -1,28 +1,63 @@
 {% extends 'base.html' %}
 
- {% block content %}
+{% block content %}
 
- <h1>Welcome back, <b>{{name}}</b>.</h1>
- <p>{{title}}</p>
+ {% load static %}
+ <link rel="stylesheet" href="{% static 'todolist/style.css' %}">
+
+ <h1>{{title}} {{name}}.</h1>
+ <p>{{subtitle}}</p>
  <br>
 
- <button><a href="{% url 'todolist:add_task' %}">Add New Task</a></button>
+ <table>
+   <tr>
+      <button><a href="{% url 'todolist:add_task' %}">Add New Task</a></button>
+   </tr>
+   <tr>
+      <button><a href="{% url 'todolist:delete_all' %}">Clear All Tasks</a></button>
+   </tr>
+ </table>
+
+ <br>
    <table>
       <tr>
-         <th>Task Creation Date | </th>
-         <th>Task Name | </th>
-         <th>Task Description</th>
+
+         <th> Creation Date </th>
+         <th> Task Name </th>
+         <th> Description </th>
+         <th> Completion </th>
+         <th colspan="2"> Actions</th>
+
       </tr> 
       {% for task in list_tasks %}
       <tr>
-         <th>{{task.date}}</th>
-         <th>{{task.task_name}}</th>
-         <th>{{task.description}}</th>
+
+         <td>{{task.date}}</td>
+         <td>{{task.task_name}}</td>
+         <td>{{task.description}}</td>
+         <td>{{task.is_finished}}</td>
+
+         <div class = "form">
+            <form method="POST" action="finish-task/{{task.id}}">
+               {% csrf_token %}
+               <td><input class="btn" type="submit" value="DONE!"/></td> 
+            </form>
+            <form method="POST" action="delete-task/{{task.id}}">
+               {% csrf_token %}
+               <td><input class="btn" type="submit" value="DELETE"/></td> 
+            </form>
+         </div>
+
       </tr>
       {% endfor %}
    </table>
 
    <br> <br>
+   {% if messages %}  
+      {% for message in messages %}  
+         <p>{{message}}</p>
+      {% endfor %}  
+   {% endif %}
    <p>Last login session: {{ last_login }}</p>
    <button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
 
