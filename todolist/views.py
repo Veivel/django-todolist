@@ -22,8 +22,6 @@ def show_todolist(request):
     
     current_user = request.user
     context = {
-        'title':"Welcome back,",
-        'subtitle':"Here is your todolist.",
         'name': current_user,
         'list_tasks': Task.objects.filter(user=current_user),
         'last_login': request.COOKIES['last_login']
@@ -67,7 +65,7 @@ def delete_task(request, id):
     ''' Remove task from database completely.'''
     
     Task.objects.filter(pk=id).delete()
-    messages.success(request, "Task deleted.")
+    messages.success(request, "Task successfully deleted.")
     
     return redirect("todolist:show_todolist")
 
@@ -76,7 +74,7 @@ def delete_all(request):
     ''' Delete (all of) one user's tasks.'''
     
     Task.objects.filter(user=request.user).delete()
-    messages.success(request, "Tasks deleted.")
+    messages.success(request, "Tasks successfully deleted.")
     
     return redirect("todolist:show_todolist")
 

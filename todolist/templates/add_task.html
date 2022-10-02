@@ -6,13 +6,13 @@
 
 {% block content %}
 
-<div class = "form">
+<div class="add-task position-absolute top-50 start-50 translate-middle">
 
-    <h1>Add Task</h1>
+    <h1 class="text-primary">Add Task</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table class="table">
             <tr>
                 <td>Task Name: </td>
                 <td><input type="text" name="task_name" placeholder="Task.." class="form-control"></td>
@@ -24,8 +24,7 @@
             </tr>
 
             <tr>
-                <td></td>
-                <td><input class="btn" type="submit" value="Submit"></td>
+                <td colspan="2"><button class="btn btn-dark" type="submit" value="Submit">Submit</td>
             </tr>
         </table>
     </form>
