@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    {% extends 'base.html' %}
+    {% load static %}
+    
+    {% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'todolist/script.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            setup();
+        });
+    </script>
+    
+    <body>
+        <div style="position:absolute; width:100%; height:100%;" class="bg-dark">
+            
+            <!-- Modal -->
+            <div class="modal fade" id="newTaskModal" tabindex="-1" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="newTaskModalLabel">Enter Task Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="taskForm" method="POST" action="">
+                        {% csrf_token %}
+                            <table class="table">
+                                <tr>
+                                    <td>Task Name: </td>
+                                    <td><input type="text" name="task_name" placeholder="Task.." class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Task Description: </td>
+                                    <td><input type="text" name="description" placeholder="Description.." class="form-control"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal">Close</button>
+                            <button id="submit-task" class="btn btn-success" onclick="submitNewTask(taskForm)">Submit</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <!-- Header -->
+            <div>
+                <h1 class="display-4 text-light">TODOLIST 2.0</h1>
+                <p id="welcomeMsg" class="subtitle text-light">Welcome back, {{user}}.</p>
+                <button id="modalButton" type="button" onclick="$('#newTaskModal').modal('show')">New Task</button>
+            </div>
+            <br>
+            <br>
+
+            <!-- Cards -->
+            <div class="container">
+                <div id="data" class="row row-cols-3 mx-auto">
+                </div>
+            </div>
+
+        </div>
+    </body>
+    {% endblock content %}
+</html>

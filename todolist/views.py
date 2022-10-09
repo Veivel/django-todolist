@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+# for json view
+from django.core import serializers
+from django.http import HttpResponse
 
 @login_required(login_url='login/')
 def show_todolist(request):
@@ -34,6 +37,7 @@ def add_task(request):
     
     if request.method == "POST":
         form = Form(request.POST)
+        print("\n\n\n\n\n", form.data)
         
         new_task = Task()
         new_task.user = request.user
@@ -120,4 +124,15 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+@login_required(login_url='login/')
+def get_json(request):
+    current_user = request.user
+    data = Task.objects.filter(user=current_user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@login_required(login_url='login/')
+def ajax_show_todolist(request):
+    context = {
+        'user': request.user
+    }
+    return render(request, 'todolist_ajax.html', context)
