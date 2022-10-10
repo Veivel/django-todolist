@@ -145,10 +145,9 @@ def ajax_show_todolist(request):
     }
     return render(request, 'todolist_ajax.html', context)
 
-@login_required(login_url='login/')
+#@login_required(login_url='login/')
 def add(request):
-    ''' A view serving a form (to the user) to create a new todolist task. 
-    Similar to add_task but made for AJAX POST request. '''
+    ''' Returns the new task in JSON form. '''
     
     if request.method == "POST":
         form = Form(request.POST)
@@ -160,8 +159,4 @@ def add(request):
         new_task.description = form.data['description']
         new_task.save()
         
-        response = HttpResponseRedirect(reverse("todolist:show_todolist"))
-        messages.success(request, 'Task saved.')
-        return(response)
-    else:
-        return redirect('todolist:ajax_show_todolist')
+        return HttpResponse(serializers.serialize("json",[new_task]), content_type="application/json")
