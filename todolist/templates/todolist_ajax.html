@@ -41,7 +41,7 @@
                         </form>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-task" class="btn btn-success" onclick="submitNewTask(taskForm)">Submit</button>
+                            <button id="submit-task" class="btn btn-primary" onclick="submitNewTask(taskForm)">Submit</button>
                     </div>
                 </div>
                 </div>
@@ -49,17 +49,25 @@
             
             <!-- Header -->
             <div>
-                <h1 class="display-4 text-light">TODOLIST 2.0</h1>
-                <p id="welcomeMsg" class="subtitle text-light">Welcome back, {{user}}.</p>
-                <button id="modalButton" type="button" onclick="$('#newTaskModal').modal('show')">New Task</button>
+                <h1 class="display-4 text-primary">TODOLIST 2.0</h1>
+                <p id="welcomeMsg" class="subtitle text-primary">Welcome back, {{user}}.</p>
+                <div class="row row-cols-3 w-50 mx-auto">
+                    <button id="logoutButton" class="btn btn-dark btn-outline-danger" onclick="logout()">Logout</button>
+                    <p></p>
+                    <button id="modalButton" class="btn btn-dark btn-outline-light" onclick="$('#newTaskModal').modal('show')">New Task</button>
+                </div>
             </div>
             <br>
             <br>
 
             <!-- Cards -->
             <div class="container">
-                <div id="data" class="row row-cols-3 mx-auto">
+                <div id="data" class="row row-cols-12 mx-auto">
                 </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div>
             </div>
 
         </div>

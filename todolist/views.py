@@ -37,7 +37,6 @@ def add_task(request):
     
     if request.method == "POST":
         form = Form(request.POST)
-        print("\n\n\n\n\n", form.data)
         
         new_task = Task()
         new_task.user = request.user
@@ -86,7 +85,10 @@ def __flush_tasks():
     ''' In case I need to delete the entire tasks table. '''
     
     Task.objects.all().delete()
-    print("\n\nFlush successful.\n\n")
+    messages.success("Flush successful.")
+    print("\nFlush successful.\n")
+    
+# ----- Login/logout/register -----
 
 def register(request):
     form = forms.UserCreationForm()
@@ -97,6 +99,9 @@ def register(request):
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('todolist:login_user')
+        else:
+            messages.error(request, 'Akun tidak bisa didaftarkan. Periksa kembali data anda.')
+            return redirect('todolist:register')
     else:
         context = {'form':form}
         return render(request, 'register.html', context)
@@ -108,7 +113,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user) # melakukan login terlebih dahulu
-            response = HttpResponseRedirect(reverse("todolist:show_todolist")) # membuat response
+            response = HttpResponseRedirect(reverse("todolist:ajax_show_todolist")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # menyimpan cookies ke response
             response.set_cookie('user', user)
             return response
@@ -124,6 +129,9 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+
+# ----- Tugas 6 -----
+
 @login_required(login_url='login/')
 def get_json(request):
     current_user = request.user
@@ -136,3 +144,24 @@ def ajax_show_todolist(request):
         'user': request.user
     }
     return render(request, 'todolist_ajax.html', context)
+
+@login_required(login_url='login/')
+def add(request):
+    ''' A view serving a form (to the user) to create a new todolist task. 
+    Similar to add_task but made for AJAX POST request. '''
+    
+    if request.method == "POST":
+        form = Form(request.POST)
+        
+        new_task = Task()
+        new_task.user = request.user
+        new_task.date = datetime.date.today()
+        new_task.task_name = form.data['task_name']
+        new_task.description = form.data['description']
+        new_task.save()
+        
+        response = HttpResponseRedirect(reverse("todolist:show_todolist"))
+        messages.success(request, 'Task saved.')
+        return(response)
+    else:
+        return redirect('todolist:ajax_show_todolist')

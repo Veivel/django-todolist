@@ -13,7 +13,7 @@ function getTodolist() {
     $.getJSON("json", function(data) {
         var item = '';
         $.each(data, function (key, task) {
-                item += `<div id="card-${task.pk}" class="card border-dark my-0.5 mx-0 text-start"> <div class="card-body">`;
+                item += `<div id="card-${task.pk}" class="card border-dark my-0.5 mx-auto col-xl-3 col-sm-6 text-start"> <div class="card-body">`;
                 item += `<h2 class="card-title">${task.fields.task_name} </h2>`;
                 item += `<p class="card-text">${task.fields.date}</p>`;
                 item += `<p class="card-text">${task.fields.description}</p>`;
@@ -39,7 +39,7 @@ function getTodolist() {
  * Creates a POST request to submit the newly created task form.
  */
 function submitNewTask(taskForm) {
-    $.post("create-task/", $(taskForm).serialize(), function(){
+    $.post("add", $(taskForm).serialize(), function(){
         $(location).attr('href', "");
     });
 }
@@ -62,4 +62,8 @@ function markAsDone(id) {
     $.post(`finish-task/${id}`, $(taskForm).serialize(), function(){
         document.getElementById(`card-footer-${id}`).setAttribute('class', "row row-cols-2 card-footer my-auto text-bg-success bg-opacity-75");
     });
+}
+
+function logout() {
+    $(location).attr('href', 'logout/');
 }
