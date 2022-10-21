@@ -1,2 +1,5 @@
 /* Acknowledgements: https://stackoverflow.com/questions/70129007/django-static-css-is-not-loading-on-page */
  
+body {
+    background-color: '#212529';
+}

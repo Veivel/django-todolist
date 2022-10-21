@@ -5,23 +5,28 @@
 {% endblock meta %}
 
 {% block content %}
+<div class="position-absolute top-50 start-50 translate-middle">
 
-<div class = "login  position-absolute top-50 start-50 translate-middle">
+<div class= "card login px-5 py-3" style="background-color: #15191D;">
 
-    <h1 class="text-primary">Login</h1>
+    <h1 class="text-primary">Login to your Todolist</h1>
+    <p class="text-light">Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a></p>
+    <br>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table class="text-light">
             <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                <td>Username:</td>
+                <td><input type="text" name="username" placeholder="Enter username..." class="form-control"></td>
             </tr>
                     
             <tr>
                 <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                <td><input type="password" name="password" placeholder="Enter password..." class="form-control"></td>
             </tr>
+
+            <tr><td colspan="2"><br></td></tr>
 
             <tr>
                 <td></td>
@@ -29,18 +34,17 @@
             </tr>
         </table>
     </form>
-        
-    <p>Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a></p>
-    <br>
 
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            <span class="alert alert-info">{{ message }}</span>
-        {% endfor %}
-    </ul>
-    {% endif %}
+</div>
 
+{% if messages %}
+    <br><br>
+    <div>
+    {% for message in messages %}
+        <span class="alert alert-info">{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
 
 </div>
 

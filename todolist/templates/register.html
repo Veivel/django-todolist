@@ -6,29 +6,36 @@
 
 {% block content %}  
 
-<div class = "add-task position-absolute top-50 start-50 translate-middle">
+<div class="position-absolute top-50 start-50 translate-middle">
+<div class= "card add-task px-5 py-3" style="background-color: #15191D;">
     
-    <h1 class="text-primary" >Formulir Registrasi</h1>  
+    <h1 class="text-primary" >Account Registration</h1>  
+    <a href="/todolist/login">Go back to Login Menu</a>
+    <br><br>
 
         <form method="POST">  
             {% csrf_token %}  
-            <table class="text-start">  
-                {{ form.as_table }}  
+            <table class="text-start text-light">  
+                {{ form.as_table }}
+                <tr><td><br></td></tr>
                 <tr>  
-                    <td class="text-center" colspan="2"><button class="btn btn-primary submit" name="submit" value="Daftar"/>Register</td>  
+                    <td class="text-center" colspan="2">
+                        <button class="btn btn-primary submit" name="submit" value="Daftar"/>Register
+                    </td>  
                 </tr>  
             </table>  
         </form>
-
-        <br><br>
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <span class="alert alert-info">{{ message }}</span>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
 </div>  
+
+{% if messages %}
+    <br><br>
+    <div>
+    {% for message in messages %}
+        <span class="alert alert-info">{{ message }}</span>
+    </div>
+    {% endfor %}
+{% endif %}
+
+</div>
 
 {% endblock content %}
