@@ -29,16 +29,18 @@
             </tr>
         </table>
     </form>
+        
+    <p>Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a></p>
+    <br>
 
     {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+    <ul>
+        {% for message in messages %}
+            <span class="alert alert-info">{{ message }}</span>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
 
 </div>
 

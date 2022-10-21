@@ -79,7 +79,7 @@ def delete_all(request):
     Task.objects.filter(user=request.user).delete()
     messages.success(request, "Tasks successfully deleted.")
     
-    return redirect("todolist:show_todolist")
+    return redirect("todolist:ajax_show_todolist")
 
 def __flush_tasks():
     ''' In case I need to delete the entire tasks table. '''
@@ -119,9 +119,10 @@ def login_user(request):
             return response
         else:
             messages.info(request, 'Username atau Password salah!')
-    else:
-        context = {}
-        return render(request, 'login.html', context)
+            # return response
+        
+    context = {}
+    return render(request, 'login.html', context)
     
 def logout_user(request):
     logout(request)
@@ -141,8 +142,10 @@ def get_json(request):
 @login_required(login_url='login/')
 def ajax_show_todolist(request):
     context = {
-        'user': request.user
+        'user': request.user,
+        'is_empty': len(Task.objects.filter(user=request.user)) == 0
     }
+    print(len(Task.objects.filter(user=request.user)))
     return render(request, 'todolist_ajax.html', context)
 
 #@login_required(login_url='login/')

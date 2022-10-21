@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'todolist/script.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script>
         $(document).ready(function() {
             setup();
@@ -46,19 +47,58 @@
                 </div>
                 </div>
             </div>
+
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand text-primary font-weight-bold" href="ajax">TODOLIST 2.0</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <span class="navbar-brand" href="#">Welcome back, {{user}}!</span>
+                    </ul>
+
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown" style="list-style-type:none;">
+                        
+                        <!-- Dropdown Toggle button -->
+                        <button type="button" class="nav-link btn" data-bs-toggle="dropdown">
+                            Menu 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 20 18">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown items -->
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                          <li><a class="dropdown-item" role="button" onclick="$('#newTaskModal').modal('show')">Create New Task</a></li>
+                          <li><a class="dropdown-item" role="button" href="{% url 'todolist:delete_all' %}">Clear All Tasks</a></li>
+                          <li><span class="dropdown-item text-align-end text-secondary">Coming soon...</span></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button id="logoutButton" class="btn btn-outline-danger me-md-2" onclick="logout()">Logout</button>
+                          </li>
+                        </ul>
+                    </li>
+
+                  </div>
+                </div>
+              </nav>
             
             <!-- Header -->
             <div>
-                <h1 class="display-4 text-primary">TODOLIST 2.0</h1>
-                <p id="welcomeMsg" class="subtitle text-primary">Welcome back, {{user}}.</p>
-                <div class="row row-cols-3 w-50 mx-auto">
-                    <button id="logoutButton" class="btn btn-dark btn-outline-danger" onclick="logout()">Logout</button>
-                    <p></p>
-                    <button id="modalButton" class="btn btn-dark btn-outline-light" onclick="$('#newTaskModal').modal('show')">New Task</button>
-                </div>
+                <br>
+                <h1 class="text-light">Todolist</h1>
+                <p id="emptyMsg" class="text-light">
+                    {% if is_empty %}
+                        Your todolist is empty... add new items via Menu!
+                    {% endif %}
+                </p>
+                <br>
             </div>
-            <br>
-            <br>
 
             <!-- Cards -->
             <div class="container">

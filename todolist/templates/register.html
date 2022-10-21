@@ -20,13 +20,14 @@
             </table>  
         </form>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
+        <br><br>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <span class="alert alert-info">{{ message }}</span>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
 </div>  
 
